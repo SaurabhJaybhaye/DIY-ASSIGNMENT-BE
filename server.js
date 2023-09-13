@@ -15,7 +15,6 @@ app.use(express.json());
 
 // setting Routes
 
-// app.use("/api/classes", require("./routes/classesRoutes"));
 // app.use("/api/users", require("./routes/userRoutes"));
 
 // localhost API lisner
