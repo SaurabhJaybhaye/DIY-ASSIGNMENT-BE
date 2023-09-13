@@ -16,4 +16,8 @@ exports.ERROR_TITLES = {
   NO_ERROR: "No Error all good!",
   UNAUTHORIZED_TOKEN: "Token is not authorized",
   MISSING_TOKEN: "Token is missing or user is Unauthorized",
+  MANDATORY_NAME: "Name is mandatory",
+  MANDATORY_EMPID: "EmpId is mandatory",
+  MANDATORY_PASSWORD: "Password is mandatory",
+  MANDATORY_EMAIL: "Email is mandatory",
 };
