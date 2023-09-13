@@ -28,7 +28,11 @@ const postEmployee = asyncHandler(async (req, resp) => {
       throw new Error(errorMessage);
     }
   }
-
+  const oldEmpId = await Employee.findOne({ empId: empId });
+  if (oldEmpId) {
+    resp.status(400);
+    throw new Error(`empId ${empId} already exist`);
+  }
   const newEmployee = await Employee.create({
     name,
     empId,
