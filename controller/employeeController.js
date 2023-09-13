@@ -10,6 +10,12 @@ const getAllEmployees = asyncHandler(async (req, resp) => {
   resp.json(allEmployees);
 });
 
+const getEmployee = asyncHandler(async (req, resp) => {
+  const empId = req.params.empId;
+  const employee = await Employee.find({ empId: empId });
+  resp.json(employee);
+});
+
 // Post functions
 
 const postEmployee = asyncHandler(async (req, resp) => {
@@ -51,4 +57,5 @@ const postEmployee = asyncHandler(async (req, resp) => {
 module.exports = {
   getAllEmployees,
   postEmployee,
+  getEmployee,
 };
