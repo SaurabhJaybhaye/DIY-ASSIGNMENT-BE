@@ -17,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/employees", require("./routes/employeeRoutes"));
 app.use("/api/meal", require("./routes/mealRoutes"));
+app.use("/api/menu", require("./routes/menuRoutes"));
 
 // localhost API lisner
 app.listen(port, () => {
