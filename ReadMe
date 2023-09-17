@@ -1,0 +1,67 @@
+1. Do npm install
+2. npm run dev
+
+3. Login API call
+   Post API: "http://localhost:8000/api/employees/login"
+   Data:{
+   "email":"Saurabh@demo.com",
+   "password":"Saurabh@123"
+   }
+
+4. Get all employees
+   Get API:"http://localhost:8000/api/employees/"
+
+5. Get single employee
+   Get API:"http://localhost:8000/api/employees/empId"
+
+6. Get Meal of an employee
+   Get: API:"http://localhost:8000/api/meal/empId"
+
+7. Get menus
+   Get API: "http://localhost:8000/api/menu/filter"
+   Get API: "http://localhost:8000/api/menu/filter?filterType=week"
+   Get API: "http://localhost:8000/api/menu/filter?filterType=month"
+   Get API: "http://localhost:8000/api/menu/filter?filterType=year"
+   Get API: "http://localhost:8000/api/menu/filter?filterType=2023-09-17"
+   To get menus for a specific date (e.g., "2023-09-17"):
+
+8. Post new Employee
+   Post API:"http://localhost:8000/api/employees/"
+   Data:{
+   "name":"Saurabh",
+   "empId":"OPC001",
+   "password":"Saurabh@123",
+   "email":"saurabh@demo.com",
+   "meal":{
+   "lunch": ["2023-09-14"],
+   "breakfast": ["2023-09-13"]
+   }
+   }
+
+9. Post Add Meal of an employee
+   Post API:"http://localhost:8000/api/meal/empId"
+   Data:{
+   "lunch": ["2023-09-15"],
+   "breakfast": ["2023-09-15"]
+   }
+
+10. Post Add Menu
+    Post API:"http://localhost:8000/api/menu/",
+    Data:[
+    {
+    "day": "Monday",
+    "dishName": {
+    "Breakfast": "Menu 1",
+    "Lunch": "Menu 2"
+    },
+    "date": "2023-09-18"
+    },
+    {
+    "day": "Tuesday",
+    "dishName": {
+    "Breakfast": "Menu 3",
+    "Lunch": "Menu 4"
+    },
+    "date": "2023-09-19"
+    }
+    ]
