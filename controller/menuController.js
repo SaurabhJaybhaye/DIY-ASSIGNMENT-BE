@@ -48,20 +48,23 @@ const getAllMenu = asyncHandler(async (req, res) => {
 
 // post functions
 const addMenu = asyncHandler(async (req, res) => {
-  const { day, mealType, dishName, date } = req.body;
-
   try {
-    const existingMenu = await Menu.findOne({ date, mealType });
-    if (existingMenu) {
-      return res
-        .status(400)
-        .json({ message: "Menu already exists for this date and meal type." });
-    }
-    const menu = new Menu({ day, mealType, dishName, date });
-    await menu.save();
-    res.json(menu);
+    const menus = req.body; // Assuming you're sending an array of menus in the request body
+
+    // Attempt to insert the menus
+    const result = await Menu.insertMany(menus);
+
+    // If successful, return the result
+    res.json(result);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    // If the error is due to a duplicate key (date), handle it separately
+    if (error.code === 11000 && error.keyPattern && error.keyPattern.date) {
+      res.status(400).json({
+        error: `Menu with date '${error.keyValue.date}' already exists.`,
+      });
+    } else {
+      res.status(500).json({ error: error.message });
+    }
   }
 });
 
