@@ -23,6 +23,10 @@ const employeeSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  meal: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Meal",
+  },
 });
 
 const Employee = mongoose.model("Employee", employeeSchema);
