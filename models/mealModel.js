@@ -9,8 +9,16 @@ const mealSchema = new mongoose.Schema({
   lunch: {
     type: [Date],
   },
+  lunchCount: {
+    type: Number,
+    default: 0,
+  },
   breakfast: {
     type: [Date],
+  },
+  breakfastCount: {
+    type: Number,
+    default: 0,
   },
 });
 
