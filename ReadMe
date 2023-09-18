@@ -1,25 +1,24 @@
 1. Do npm install
 2. npm run dev
 
-3. Login API call
+3. Login API call (Public)
    Post API: "http://localhost:8000/api/employees/login"
    Data:{
    "email":"Saurabh@demo.com",
    "password":"Saurabh@123"
    }
 
-4. Get all employees
+4. Get all employees (Private)
    Get API:"http://localhost:8000/api/employees/"
 
-5. Get single employee
+5. Get single employee (Private)
    Get API:"http://localhost:8000/api/employees/empId"
    GET API:"http://localhost:8000/api/employee/empId?month=3&year=2023"
 
-
-6. Get Meal of an employee
+6. Get Meal of an employee (Private)
    Get: API:"http://localhost:8000/api/meal/empId"
 
-7. Get menus
+7. Get menus (Private)
    Get API: "http://localhost:8000/api/menu/filter"
    Get API: "http://localhost:8000/api/menu/filter?filterType=week"
    Get API: "http://localhost:8000/api/menu/filter?filterType=month"
@@ -27,7 +26,7 @@
    Get API: "http://localhost:8000/api/menu/filter?filterType=2023-09-17"
    To get menus for a specific date (e.g., "2023-09-17"):
 
-8. Post new Employee
+8. Post new Employee (Private)
    Post API:"http://localhost:8000/api/employees/"
    Data:{
    "name":"Saurabh",
@@ -40,14 +39,14 @@
    }
    }
 
-9. Post Add Meal of an employee
+9. Post Add Meal of an employee (Private)
    Post API:"http://localhost:8000/api/meal/empId"
    Data:{
    "lunch": ["2023-09-15"],
    "breakfast": ["2023-09-15"]
    }
 
-10. Post Add Menu
+10. Post Add Menu (Private)
     Post API:"http://localhost:8000/api/menu/",
     Data:[
     {
@@ -67,3 +66,6 @@
     "date": "2023-09-19"
     }
     ]
+
+how add AccessToken
+pass Bearer Token : which you will get from login
