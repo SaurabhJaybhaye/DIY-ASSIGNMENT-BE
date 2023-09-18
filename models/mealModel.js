@@ -1,32 +1,31 @@
 const mongoose = require("mongoose");
 
-const mealSchema = new mongoose.Schema({
-  empId: {
-    type: String,
-    required: true,
-    unique: true,
+const mealSchema = new mongoose.Schema(
+  {
+    empId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    lunch: {
+      type: [Date],
+    },
+    breakfast: {
+      type: [Date],
+    },
   },
-  lunch: {
-    type: [Date],
-  },
-  lunchCount: {
-    type: Number,
-    default: 0,
-  },
-  breakfast: {
-    type: [Date],
-  },
-  breakfastCount: {
-    type: Number,
-    default: 0,
-  },
+  {
+    toJSON: { virtuals: true }, // Enable virtual properties in JSON output
+  }
+);
+
+// Define virtual properties for lunchCount and breakfastCount
+mealSchema.virtual("lunchCount").get(function () {
+  return this.lunch ? this.lunch.length : 0;
 });
 
-// Middleware to update lunchCount and breakfastCount
-mealSchema.pre("save", function (next) {
-  this.lunchCount = this.lunch ? this.lunch.length : 0;
-  this.breakfastCount = this.breakfast ? this.breakfast.length : 0;
-  next();
+mealSchema.virtual("breakfastCount").get(function () {
+  return this.breakfast ? this.breakfast.length : 0;
 });
 
 const Meal = mongoose.model("Meal", mealSchema);
