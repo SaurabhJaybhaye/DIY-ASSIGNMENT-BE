@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const validateToken = require("../middleware/validateTokenHandler");
+const validateToken = require("../middleware/validateTokenHandler");
 
 const {
   getAllMenu,
@@ -8,8 +8,8 @@ const {
   putMenu,
 } = require("../controller/menuController");
 
+router.use(validateToken);
 router.route("/").post(addMenu);
-
 router.route("/filter").get(getAllMenu);
 router.route("/:date").put(putMenu);
 

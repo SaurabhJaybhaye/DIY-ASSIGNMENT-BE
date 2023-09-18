@@ -10,16 +10,14 @@ const validateToken = asyncHandler(async (req, resp, next) => {
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECERT, (err, decoded) => {
       if (err) {
-        resp.status(401);
-        throw new Error(ERROR_TITLES.UNAUTHORIZED_TOKEN);
+        resp.status(401).json({ error: ERROR_TITLES.UNAUTHORIZED_TOKEN });
       }
       req.user = decoded.user;
       next();
     });
   }
   if (!token) {
-    resp.status(401);
-    throw new Error(ERROR_TITLES.MISSING_TOKEN);
+    resp.status(401).json({ error: ERROR_TITLES.MISSING_TOKEN });
   }
 });
 
