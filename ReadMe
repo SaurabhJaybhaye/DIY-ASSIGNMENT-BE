@@ -13,6 +13,8 @@
 
 5. Get single employee
    Get API:"http://localhost:8000/api/employees/empId"
+   GET API:"http://localhost:8000/api/employee/empId?month=3&year=2023"
+
 
 6. Get Meal of an employee
    Get: API:"http://localhost:8000/api/meal/empId"
