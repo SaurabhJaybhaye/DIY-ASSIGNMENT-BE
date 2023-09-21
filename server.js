@@ -3,13 +3,12 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const connectDb = require("./config/dbConnection");
 const errorHandler = require("./middleware/errorHandler");
-const cors = require("cors");
+const cors = require("cors"); // Add this line
 const app = express();
 const port = process.env.PORT || 7000;
 
-app.use(cors());
 connectDb();
-
+app.use(cors());
 //passer for getting data from client to serverside
 app.use(express.json());
 
