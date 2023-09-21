@@ -67,8 +67,7 @@ const postEmployee = asyncHandler(async (req, resp) => {
 
   const oldEmpId = await Employee.findOne({ empId });
   if (oldEmpId) {
-    resp.status(400);
-    throw new Error(`empId ${empId} already exist`);
+    resp.status(400).json({ error: `empId ${empId} already exist` });
   }
 
   const mealData = new Meal({
