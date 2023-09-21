@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const connectDb = require("./config/dbConnection");
 const errorHandler = require("./middleware/errorHandler");
 const cors = require("cors"); // Add this line
+const authenticateUser = require("./middleware/authenticateUser");
 const app = express();
 const port = process.env.PORT || 7000;
 

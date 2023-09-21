@@ -41,6 +41,16 @@ const loginUser = asyncHandler(async (req, resp) => {
   }
 });
 
+// logout  user
+const logoutUser = asyncHandler(async (req, resp) => {
+  const accessToken = req.headers.authorization.split(" ")[1];
+
+  // Add the token to a blacklist or revocation list
+  await addToRevocationList(accessToken);
+
+  resp.status(200).json({ message: "Logged out successfully" });
+});
+
 // Post employee
 const postEmployee = asyncHandler(async (req, resp) => {
   const { name, empId, password, role, email, meal } = req.body;
@@ -94,4 +104,5 @@ const postEmployee = asyncHandler(async (req, resp) => {
 module.exports = {
   postEmployee,
   loginUser,
+  logoutUser,
 };
