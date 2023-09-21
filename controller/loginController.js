@@ -10,8 +10,7 @@ const loginUser = asyncHandler(async (req, resp) => {
   const { email, password } = req.body;
   // checking for required fields
   if (!email || !password) {
-    resp.status(400);
-    throw new Error("All Fields are Mandatory!");
+    resp.status(400).json({ error: "All Fields are Mandatory!" });
   }
   // checking if user is register then will compare password with hashPassword
   const user = await Employee.findOne({ email });
@@ -36,8 +35,7 @@ const loginUser = asyncHandler(async (req, resp) => {
     );
     resp.status(200).json({ accessToken, userData: { email, name, id } });
   } else {
-    resp.status(400);
-    throw new Error("Email or Password is not Valid");
+    resp.status(400).json({ error: "Email or Password is not Valid" });
   }
 });
 
@@ -63,8 +61,7 @@ const postEmployee = asyncHandler(async (req, resp) => {
 
   for (const { field, errorMessage } of requiredFields) {
     if (!field) {
-      resp.status(400);
-      throw new Error(errorMessage);
+      resp.status(400).json({ error: errorMessage });
     }
   }
 

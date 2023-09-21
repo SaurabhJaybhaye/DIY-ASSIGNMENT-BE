@@ -6,8 +6,7 @@ const authenticateUser = async (req, resp, next) => {
 
   // Check if the token is in the list of revoked tokens
   if (await isTokenRevoked(accessToken)) {
-    resp.status(401);
-    throw new Error("Token has been revoked");
+    resp.status(401).json({ error: "Token has been revoked" });
   }
 
   try {
@@ -19,8 +18,7 @@ const authenticateUser = async (req, resp, next) => {
     req.user = decoded.user;
     next();
   } catch (error) {
-    resp.status(401);
-    throw new Error("Invalid token");
+    resp.status(401).json({ error: "Invalid Token" });
   }
 };
 

@@ -69,5 +69,11 @@
     }
     ]
 
+11. Logout API call (Private)
+    Post API: "http://localhost:8000/api/employees/logout"
+    Data:{}
+
+NOTE if API is Private you need to pass AccessToken
+
 how add AccessToken
 pass Bearer Token : which you will get from login
