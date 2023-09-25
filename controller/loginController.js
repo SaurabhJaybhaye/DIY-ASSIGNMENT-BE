@@ -19,13 +19,15 @@ const loginUser = asyncHandler(async (req, resp) => {
     // process.env.ACCESS_TOKEN_SECRET is used for embedded information
     // expiresIn is use for setting expire token time
     const name = user.name;
-    const id = user._id;
+    const empId = user.empId;
+    const role = user.role;
     const accessToken = await jwt.sign(
       {
         user: {
           name: user.name,
           email: user.email,
           empId: user.empId,
+          role: user.role,
         },
       },
       process.env.ACCESS_TOKEN_SECERT,
@@ -33,9 +35,11 @@ const loginUser = asyncHandler(async (req, resp) => {
         expiresIn: "15m",
       }
     );
-    resp
-      .status(200)
-      .json({ accessToken, userData: { email, name, id }, success: true });
+    resp.status(200).json({
+      accessToken,
+      userData: { email, name, empId, role },
+      success: true,
+    });
   } else {
     resp.status(400).json({ error: "Email or Password is not Valid" });
   }

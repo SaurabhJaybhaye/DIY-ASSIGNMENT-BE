@@ -40,7 +40,7 @@ const errorHandler = (err, req, resp, next) => {
       });
       break;
     default:
-      console.log(ERROR_TITLES.NO_ERROR);
+      resp.json({ error: ERROR_TITLES.NO_ERROR });
       break;
   }
 };
