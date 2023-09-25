@@ -1,7 +1,11 @@
 1. Do npm install
 2. npm run dev
+
    2.1 if got mongodb error even if you have mongodb then go to .env file and changed
    DATABASE_URL='mongodb://localhost:27017/assignment' with DATABASE_URL='mongodb://127.0.0.1:27017/assignment'
+
+   2.2 If you are using react native then do a call using using laptop ip address
+   like here we use "http://localhost:8000/api/employees/login" instead use "http://192.168.X.X:8000/api/employees/" where X.X are IP of your PC
 
 3. Login API call (Public)
    Post API: "http://localhost:8000/api/employees/login"
