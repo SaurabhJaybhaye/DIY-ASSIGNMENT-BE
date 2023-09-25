@@ -39,7 +39,8 @@ const getEmployee = asyncHandler(async (req, res) => {
 
     employee.meal.lunchCount = employee.meal.lunch.length;
     employee.meal.breakfastCount = employee.meal.breakfast.length;
-    employee.meal.cost = lunchCount * 60 + breakfastCount * 20;
+    employee.meal.totalCost =
+      employee.meal.lunch.length * 60 + employee.meal.breakfast.length * 20;
 
     res.json(employee);
   } catch (error) {
