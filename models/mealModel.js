@@ -28,6 +28,10 @@ mealSchema.virtual("breakfastCount").get(function () {
   return this.breakfast ? this.breakfast.length : 0;
 });
 
+mealSchema.virtual("totalCost").get(function () {
+  return this.lunchCount * 60 + this.breakfastCount * 20;
+});
+
 const Meal = mongoose.model("Meal", mealSchema);
 
 module.exports = Meal;

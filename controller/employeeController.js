@@ -6,7 +6,7 @@ const asyncHandler = require("express-async-handler");
 // get functions
 const getAllEmployees = asyncHandler(async (req, resp) => {
   const allEmployees = await Employee.find({}).populate("meal");
-  resp.json(allEmployees);
+  resp.status(200).json(allEmployees);
 });
 
 const getEmployee = asyncHandler(async (req, res) => {
@@ -39,6 +39,7 @@ const getEmployee = asyncHandler(async (req, res) => {
 
     employee.meal.lunchCount = employee.meal.lunch.length;
     employee.meal.breakfastCount = employee.meal.breakfast.length;
+    employee.meal.cost = lunchCount * 60 + breakfastCount * 20;
 
     res.json(employee);
   } catch (error) {

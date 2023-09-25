@@ -7,7 +7,6 @@ const cors = require("cors"); // Add this line
 const authenticateUser = require("./middleware/authenticateUser");
 const app = express();
 const port = process.env.PORT || 7000;
-
 connectDb();
 app.use(cors());
 //passer for getting data from client to serverside

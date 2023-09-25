@@ -6,7 +6,7 @@ const asyncHandler = require("express-async-handler");
 const getMeal = asyncHandler(async (req, resp) => {
   const empId = req.params.empId;
   const employee = await Meal.find({ empId });
-  resp.json(employee);
+  resp.status(200).json(employee);
 });
 
 // post functions
@@ -42,7 +42,9 @@ const putMeal = asyncHandler(async (req, resp) => {
       return resp.status(404).json({ message: "Data not found" });
     }
 
-    resp.json({ message: `Data with ID ${empId} updated successfully` });
+    resp
+      .status(200)
+      .json({ message: `Data with ID ${empId} updated successfully` });
   } catch (error) {
     console.error(error);
     resp.status(500).json({ message: "Internal Server Error" });
