@@ -3,46 +3,36 @@ const Menu = require("../models/menuModel");
 const asyncHandler = require("express-async-handler");
 
 // get functions
+
 const getAllMenu = asyncHandler(async (req, res) => {
-  const filterType = req.query.filterType;
-  let startDate, endDate;
-
-  const today = new Date();
-
-  switch (filterType) {
-    case "week":
-      startDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() - today.getDay()
-      ); // Start of the week
-      endDate = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() + (6 - today.getDay())
-      ); // End of the week
-      break;
-    case "month":
-      startDate = new Date(today.getFullYear(), today.getMonth(), 1); // Start of the month
-      endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); // End of the month
-      break;
-    case "year":
-      startDate = new Date(today.getFullYear(), 0, 1); // Start of the year
-      endDate = new Date(today.getFullYear(), 11, 31); // End of the year
-      break;
-    default:
-      startDate = new Date("2023-09-14");
-      endDate = new Date("2023-09-15");
-      break;
-  }
-
   try {
-    const filteredMenu = await Menu.find({
-      date: { $gte: startDate, $lt: endDate },
-    });
-    res.json(filteredMenu);
+    const filterType = req.query.filterType;
+    if (filterType === "week") {
+      let today = new Date();
+      let currentDay = today.getDay();
+      let firstDayOfWeek = new Date(today);
+      firstDayOfWeek.setDate(today.getDate() - currentDay);
+      firstDayOfWeek.setHours(0, 0, 0, 0);
+
+      let lastDayOfWeek = new Date(firstDayOfWeek);
+      lastDayOfWeek.setDate(firstDayOfWeek.getDate() + 6);
+      lastDayOfWeek.setHours(0, 0, 0, 0);
+
+      console.log("firstDayOfWeek", firstDayOfWeek);
+      console.log("lastDayOfWeek", lastDayOfWeek);
+
+      const weekMenu = await Menu.find({
+        date: { $gte: firstDayOfWeek, $lte: lastDayOfWeek },
+      });
+      res.json(weekMenu);
+    } else {
+      const allMenus = await Menu.find({});
+      res.status(200).json(allMenus);
+      res.json(allMenus);
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

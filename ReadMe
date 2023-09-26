@@ -27,10 +27,6 @@
 7. Get menus (Private)
    Get API: "http://localhost:8000/api/menu/filter"
    Get API: "http://localhost:8000/api/menu/filter?filterType=week"
-   Get API: "http://localhost:8000/api/menu/filter?filterType=month"
-   Get API: "http://localhost:8000/api/menu/filter?filterType=year"
-   Get API: "http://localhost:8000/api/menu/filter?filterType=2023-09-17"
-   To get menus for a specific date (e.g., "2023-09-17"):
 
 8. Post new Employee (Private)
    Post API:"http://localhost:8000/api/employees/"
