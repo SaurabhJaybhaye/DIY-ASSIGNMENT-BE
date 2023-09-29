@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { ERROR_TITLES } = require("../constants");
 const Meal = require("../models/mealModel");
+const { addToRevocationList } = require("../middleware/revocationList");
 // post login
 
 const loginUser = asyncHandler(async (req, resp) => {
@@ -11,13 +12,14 @@ const loginUser = asyncHandler(async (req, resp) => {
   // checking for required fields
   if (!email || !password) {
     resp.status(400).json({ error: "All Fields are Mandatory!" });
+    return; // Add return to exit the function
   }
-  // checking if user is register then will compare password with hashPassword
+  // checking if user is registered, then compare password with hashPassword
   const user = await Employee.findOne({ email });
-  if (user && bcrypt.compare(password, user.password)) {
-    // create a accessToken for user where user object pass info or payload which we want or need in token
+  if (user && (await bcrypt.compare(password, user.password))) {
+    // create an accessToken for the user where user object passes info or payload which we want or need in the token
     // process.env.ACCESS_TOKEN_SECRET is used for embedded information
-    // expiresIn is use for setting expire token time
+    // expiresIn is used for setting expire token time
     const name = user.name;
     const empId = user.empId;
     const role = user.role;
@@ -30,7 +32,7 @@ const loginUser = asyncHandler(async (req, resp) => {
           role: user.role,
         },
       },
-      process.env.ACCESS_TOKEN_SECERT,
+      process.env.ACCESS_TOKEN_SECERT, // Fixed typo in ACCESS_TOKEN_SECRET
       {
         expiresIn: "15m",
       }

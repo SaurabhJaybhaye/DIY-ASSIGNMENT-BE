@@ -40,10 +40,8 @@ const getAllMenu = asyncHandler(async (req, res) => {
 const addMenu = asyncHandler(async (req, res) => {
   try {
     const menus = req.body; // Assuming you're sending an array of menus in the request body
-
     // Attempt to insert the menus
     const result = await Menu.insertMany(menus);
-
     // If successful, return the result
     res.json(result);
   } catch (error) {

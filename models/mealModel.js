@@ -9,9 +9,31 @@ const mealSchema = new mongoose.Schema(
     },
     lunch: {
       type: [Date],
+      validate: [
+        {
+          validator: function (arr) {
+            return (
+              arr.length ===
+              new Set(arr.map((date) => date.toISOString().split("T")[0])).size
+            );
+          },
+          message: "Dates in lunch must be unique",
+        },
+      ],
     },
     breakfast: {
       type: [Date],
+      validate: [
+        {
+          validator: function (arr) {
+            return (
+              arr.length ===
+              new Set(arr.map((date) => date.toISOString().split("T")[0])).size
+            );
+          },
+          message: "Dates in breakfast must be unique",
+        },
+      ],
     },
   },
   {

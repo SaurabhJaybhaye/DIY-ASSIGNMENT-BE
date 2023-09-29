@@ -13,7 +13,7 @@ const {
 
 router.route("/login").post(loginUser);
 // Use validateToken middleware before the route handler
-// router.use(validateToken);
+router.use(validateToken);
 router.route("/logout").post(logoutUser);
 router.route("/").get(getAllEmployees).post(postEmployee);
 router.route("/:empId").get(getEmployee);
